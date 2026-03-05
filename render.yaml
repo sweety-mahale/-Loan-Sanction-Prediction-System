@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: loan-sanction-predictor
+    env: python
+    buildCommand: "pip install -r requirements.txt && pip install -e . && python src/pipeline/training_pipeline.py"
+    startCommand: "gunicorn app:app --bind 0.0.0.0:$PORT --workers 2 --timeout 120"
+    healthCheckPath: /health
+    envVars:
+      - key: FLASK_ENV
+        value: production
+      - key: PYTHON_VERSION
+        value: "3.10.0"

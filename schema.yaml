@@ -1,0 +1,80 @@
+columns:
+  - Age
+  - Gender
+  - Income (USD)
+  - Income Stability
+  - Profession
+  - Type of Employment
+  - Location
+  - Loan Amount Request (USD)
+  - Current Loan Expenses (USD)
+  - Has Active Credit Card
+  - Property Location
+  - Credit Score
+  - No. of Defaults
+  - Dependents
+  - Property Price
+  - Loan Sanction Amount (USD)
+  - Customer ID
+  - Name
+  - Expense Type 1
+  - Expense Type 2
+  - Property ID
+  - Property Age
+  - Property Type
+
+drop_columns:
+  - Customer ID
+  - Name
+  - Expense Type 1
+  - Expense Type 2
+  - Property ID
+  - Property Age
+  - Property Type
+
+target_column_clf: Loan sanctioned
+target_column_reg: Loan Sanction Amount (USD)
+
+numeric_features:
+  - Age
+  - Income (USD)
+  - Loan Amount Request (USD)
+  - Current Loan Expenses (USD)
+  - Credit Score
+  - No. of Defaults
+  - Dependents
+  - Property Price
+
+log_transform_features:
+  - Income (USD)
+  - Loan Amount Request (USD)
+  - Current Loan Expenses (USD)
+  - Property Price
+
+ordinal_features:
+  - Income Stability
+  - Location
+  - Has Active Credit Card
+  - Property Location
+
+ordinal_categories:
+  Income Stability:
+    - Low
+    - High
+  Location:
+    - Rural
+    - Semi-Urban
+    - Urban
+  Has Active Credit Card:
+    - Unpossessed
+    - Inactive
+    - Active
+  Property Location:
+    - Rural
+    - Semi-Urban
+    - Urban
+
+nominal_features:
+  - Gender
+  - Profession
+  - Type of Employment

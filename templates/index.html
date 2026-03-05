@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AI-powered loan sanction prediction system — get instant loan approval decisions">
+    <title>LoanWise — Loan Sanction Predictor</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<!-- ── HEADER ─────────────────────────────────────────────────────────────── -->
+<header class="header">
+    <div class="container header-inner">
+        <div class="logo">
+            <div class="logo-icon">
+                <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                    <rect width="28" height="28" rx="8" fill="#1a56db"/>
+                    <path d="M14 5L22 10V18L14 23L6 18V10L14 5Z" stroke="white" stroke-width="1.8" fill="none"/>
+                    <circle cx="14" cy="14" r="3" fill="white"/>
+                </svg>
+            </div>
+            <span class="logo-text">LoanWise</span>
+        </div>
+        <nav class="nav-links">
+            <span class="badge badge-ai">AI Powered</span>
+        </nav>
+    </div>
+</header>
+
+<!-- ── HERO ───────────────────────────────────────────────────────────────── -->
+<section class="hero">
+    <div class="container">
+        <div class="hero-tag">Instant Decision Engine</div>
+        <h1 class="hero-title">Loan Sanction Prediction</h1>
+        <p class="hero-subtitle">Get an AI-powered loan approval decision in seconds. Our dual-model system assesses eligibility and estimates your sanction amount.</p>
+        <div class="hero-stats">
+            <div class="stat">
+                <span class="stat-num">95%+</span>
+                <span class="stat-label">Accuracy</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat">
+                <span class="stat-num">&lt;1s</span>
+                <span class="stat-label">Decision Time</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat">
+                <span class="stat-num">2</span>
+                <span class="stat-label">ML Models</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ── RESULT BANNER ──────────────────────────────────────────────────────── -->
+{% if result is not none %}
+<div class="container">
+    <div class="result-card {% if result.sanctioned %}result-approved{% else %}result-rejected{% endif %}">
+        <div class="result-icon">
+            {% if result.sanctioned %}
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                <circle cx="20" cy="20" r="20" fill="#dcfce7"/>
+                <path d="M12 21L17 26L28 14" stroke="#16a34a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            {% else %}
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                <circle cx="20" cy="20" r="20" fill="#fee2e2"/>
+                <path d="M14 14L26 26M26 14L14 26" stroke="#dc2626" stroke-width="2.5" stroke-linecap="round"/>
+            </svg>
+            {% endif %}
+        </div>
+        <div class="result-content">
+            <h2 class="result-title">
+                {% if result.sanctioned %}
+                    🎉 Congratulations! Loan Approved
+                {% else %}
+                    Loan Application Not Approved
+                {% endif %}
+            </h2>
+            {% if result.sanctioned and result.amount %}
+            <p class="result-amount">Sanctioned Amount: <strong>${{ "{:,.2f}".format(result.amount) }}</strong></p>
+            <p class="result-note">This is the estimated amount based on your profile. Final amount is subject to bank review.</p>
+            {% else %}
+            <p class="result-note">Based on the provided information, this application does not meet current eligibility criteria. Improving your credit score and reducing defaults may help.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<!-- ── MAIN FORM ───────────────────────────────────────────────────────────── -->
+<div class="container main-layout">
+
+    <!-- Left: Info panel -->
+    <aside class="info-panel">
+        <h3 class="info-panel-title">How It Works</h3>
+        <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-text">
+                <strong>Fill Your Details</strong>
+                <p>Enter your personal and financial information accurately.</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-text">
+                <strong>AI Assessment</strong>
+                <p>Our Random Forest model evaluates your loan eligibility.</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-text">
+                <strong>Get Decision</strong>
+                <p>Receive instant approval status and estimated sanction amount.</p>
+            </div>
+        </div>
+
+        <div class="info-separator"></div>
+
+        <h3 class="info-panel-title">Key Factors</h3>
+        <ul class="factor-list">
+            <li><span class="factor-dot green"></span>Credit Score</li>
+            <li><span class="factor-dot green"></span>Income Stability</li>
+            <li><span class="factor-dot amber"></span>Loan-to-Income Ratio</li>
+            <li><span class="factor-dot amber"></span>Number of Defaults</li>
+            <li><span class="factor-dot red"></span>Active Liabilities</li>
+        </ul>
+
+        <div class="info-disclaimer">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <circle cx="8" cy="8" r="7" stroke="#6b7280" stroke-width="1.2"/>
+                <path d="M8 5v3M8 10.5v.5" stroke="#6b7280" stroke-width="1.2" stroke-linecap="round"/>
+            </svg>
+            <span>For informational purposes only. Not a formal bank decision.</span>
+        </div>
+    </aside>
+
+    <!-- Right: Form -->
+    <main class="form-panel">
+        <h2 class="form-title">Application Details</h2>
+        <form id="loan-form" method="POST" action="/predict" novalidate>
+
+            <!-- Section: Personal Info -->
+            <div class="form-section">
+                <div class="section-header">
+                    <div class="section-icon">👤</div>
+                    <h3>Personal Information</h3>
+                </div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="age">Age <span class="required">*</span></label>
+                        <input type="number" id="age" name="age" min="18" max="80" placeholder="e.g. 35" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="gender">Gender <span class="required">*</span></label>
+                        <select id="gender" name="gender" required>
+                            <option value="" disabled selected>Select gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="dependents">Dependents <span class="required">*</span></label>
+                        <input type="number" id="dependents" name="dependents" min="0" max="10" placeholder="e.g. 2" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="location">Applicant Location <span class="required">*</span></label>
+                        <select id="location" name="location" required>
+                            <option value="" disabled selected>Select location</option>
+                            <option value="Rural">Rural</option>
+                            <option value="Semi-Urban">Semi-Urban</option>
+                            <option value="Urban">Urban</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section: Employment & Income -->
+            <div class="form-section">
+                <div class="section-header">
+                    <div class="section-icon">💼</div>
+                    <h3>Employment & Income</h3>
+                </div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="profession">Profession <span class="required">*</span></label>
+                        <select id="profession" name="profession" required>
+                            <option value="" disabled selected>Select profession</option>
+                            <option value="Salaried">Salaried</option>
+                            <option value="Self-Employed">Self-Employed</option>
+                            <option value="Businessman">Businessman</option>
+                            <option value="Pensioner">Pensioner</option>
+                            <option value="Unemployed">Unemployed</option>
+                            <option value="Student">Student</option>
+                            <option value="others">Others</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="employment_type">Type of Employment <span class="required">*</span></label>
+                        <select id="employment_type" name="employment_type" required>
+                            <option value="" disabled selected>Select type</option>
+                            <option value="Full-time">Full-time</option>
+                            <option value="Part-time">Part-time</option>
+                            <option value="Contract">Contract</option>
+                            <option value="Retired">Retired</option>
+                            <option value="Unknown">Unknown</option>
+                            <option value="Not available">Not Available</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="income">Monthly Income (USD) <span class="required">*</span></label>
+                        <div class="input-prefix">
+                            <span>$</span>
+                            <input type="number" id="income" name="income" min="0" step="100" placeholder="e.g. 4500" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="income_stability">Income Stability <span class="required">*</span></label>
+                        <select id="income_stability" name="income_stability" required>
+                            <option value="" disabled selected>Select stability</option>
+                            <option value="Low">Low</option>
+                            <option value="High">High</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section: Financial Profile -->
+            <div class="form-section">
+                <div class="section-header">
+                    <div class="section-icon">📊</div>
+                    <h3>Financial Profile</h3>
+                </div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="credit_score">Credit Score <span class="required">*</span></label>
+                        <input type="number" id="credit_score" name="credit_score" min="300" max="900" placeholder="e.g. 720" required>
+                        <div class="credit-score-hint">
+                            <span class="hint-label poor">Poor &lt;580</span>
+                            <span class="hint-label fair">Fair 580-669</span>
+                            <span class="hint-label good">Good 670-739</span>
+                            <span class="hint-label excellent">Excellent 740+</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="no_of_defaults">Number of Defaults <span class="required">*</span></label>
+                        <input type="number" id="no_of_defaults" name="no_of_defaults" min="0" max="10" placeholder="e.g. 0" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="current_loan_expenses">Current Loan Expenses/month (USD)</label>
+                        <div class="input-prefix">
+                            <span>$</span>
+                            <input type="number" id="current_loan_expenses" name="current_loan_expenses" min="0" step="50" placeholder="e.g. 300" value="0">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="credit_card_status">Credit Card Status <span class="required">*</span></label>
+                        <select id="credit_card_status" name="credit_card_status" required>
+                            <option value="" disabled selected>Select status</option>
+                            <option value="Unpossessed">Unpossessed (None)</option>
+                            <option value="Inactive">Inactive</option>
+                            <option value="Active">Active</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section: Loan & Property -->
+            <div class="form-section">
+                <div class="section-header">
+                    <div class="section-icon">🏠</div>
+                    <h3>Loan & Property Details</h3>
+                </div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="loan_amount_request">Requested Loan Amount (USD) <span class="required">*</span></label>
+                        <div class="input-prefix">
+                            <span>$</span>
+                            <input type="number" id="loan_amount_request" name="loan_amount_request" min="0" step="500" placeholder="e.g. 50000" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="property_price">Property Price (USD) <span class="required">*</span></label>
+                        <div class="input-prefix">
+                            <span>$</span>
+                            <input type="number" id="property_price" name="property_price" min="0" step="1000" placeholder="e.g. 200000" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="property_location">Property Location <span class="required">*</span></label>
+                        <select id="property_location" name="property_location" required>
+                            <option value="" disabled selected>Select location</option>
+                            <option value="Rural">Rural</option>
+                            <option value="Semi-Urban">Semi-Urban</option>
+                            <option value="Urban">Urban</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Submit -->
+            <div class="form-actions">
+                <button type="reset" class="btn-secondary" id="reset-btn">Clear Form</button>
+                <button type="submit" class="btn-primary" id="submit-btn">
+                    <span class="btn-text">Predict Loan Sanction</span>
+                    <span class="btn-icon">
+                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                            <path d="M9 3l6 6-6 6M3 9h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </span>
+                </button>
+            </div>
+        </form>
+    </main>
+
+</div>
+
+<!-- ── FOOTER ─────────────────────────────────────────────────────────────── -->
+<footer class="footer">
+    <div class="container">
+        <p>© 2025 LoanWise · AI-powered loan prediction · Built with Python & scikit-learn</p>
+    </div>
+</footer>
+
+<script>
+    // Loading state on submit
+    document.getElementById('loan-form').addEventListener('submit', function() {
+        const btn = document.getElementById('submit-btn');
+        btn.disabled = true;
+        btn.querySelector('.btn-text').textContent = 'Analyzing...';
+    });
+
+    // Credit score color indicator
+    const creditInput = document.getElementById('credit_score');
+    const hints = document.querySelectorAll('.hint-label');
+    creditInput.addEventListener('input', function() {
+        const val = parseInt(this.value);
+        hints.forEach(h => h.classList.remove('active'));
+        if (val < 580) hints[0].classList.add('active');
+        else if (val < 670) hints[1].classList.add('active');
+        else if (val < 740) hints[2].classList.add('active');
+        else if (val >= 740) hints[3].classList.add('active');
+    });
+
+    // Scroll to result if present
+    const result = document.querySelector('.result-card');
+    if (result) {
+        result.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+</script>
+
+</body>
+</html>

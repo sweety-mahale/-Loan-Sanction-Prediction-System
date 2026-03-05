@@ -1,0 +1,30 @@
+artifacts_root: artifacts
+
+data_ingestion:
+  root_dir: artifacts/data_ingestion
+  source_path: Loan_amount_prediction_dataset.csv
+  train_data_path: artifacts/data_ingestion/train.csv
+  test_data_path: artifacts/data_ingestion/test.csv
+  test_size: 0.2
+
+data_validation:
+  root_dir: artifacts/data_validation
+  validation_status_file: artifacts/data_validation/status.txt
+
+data_transformation:
+  root_dir: artifacts/data_transformation
+  preprocessor_clf_path: artifacts/data_transformation/preprocessor_clf.pkl
+  preprocessor_reg_path: artifacts/data_transformation/preprocessor_reg.pkl
+  clf_train_path: artifacts/data_transformation/clf_train.csv
+  clf_test_path: artifacts/data_transformation/clf_test.csv
+  reg_train_path: artifacts/data_transformation/reg_train.csv
+  reg_test_path: artifacts/data_transformation/reg_test.csv
+
+model_trainer:
+  root_dir: artifacts/model_trainer
+  classifier_path: artifacts/model_trainer/classifier.pkl
+  regressor_path: artifacts/model_trainer/regressor.pkl
+
+model_evaluation:
+  root_dir: artifacts/model_evaluation
+  metrics_path: artifacts/model_evaluation/metrics.json
