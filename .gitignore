@@ -10,8 +10,13 @@ env/
 .venv/
 .env
 
-# Artifacts (auto-generated)
-artifacts/
+# Artifacts — ignore data but KEEP trained model files
+artifacts/data_ingestion/
+artifacts/data_validation/
+artifacts/model_evaluation/
+# Keep these for deployment:
+# artifacts/model_trainer/   ← models committed to git
+# artifacts/data_transformation/  ← preprocessors committed to git
 
 # Logs
 logs/

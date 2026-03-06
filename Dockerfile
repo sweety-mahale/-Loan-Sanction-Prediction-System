@@ -17,9 +17,6 @@ COPY . .
 # Install project as a package
 RUN pip install -e .
 
-# Train models at build time
-RUN python src/pipeline/training_pipeline.py
-
 EXPOSE 8080
 
 ENV FLASK_ENV=production

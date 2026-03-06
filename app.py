@@ -16,7 +16,6 @@ def index():
 @app.route("/predict", methods=["POST"])
 def predict():
     try:
-        # Parse form inputs
         data = CustomData(
             age=float(request.form.get("age")),
             gender=request.form.get("gender"),
@@ -44,7 +43,8 @@ def predict():
 
     except Exception as e:
         logger.error(f"Prediction error: {e}")
-        raise CustomException(e, sys)
+        error_result = {"error": str(e)}
+        return render_template("index.html", result=None, error=str(e)), 200
 
 
 @app.route("/health", methods=["GET"])
