@@ -43,7 +43,7 @@ An **end-to-end production-grade ML system** that predicts loan approval eligibi
 
 ---
 
-## 🤖 ML Models
+## ML Models
 
 | Task | Model | Notes |
 |------|-------|-------|
@@ -55,12 +55,12 @@ An **end-to-end production-grade ML system** that predicts loan approval eligibi
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 ### 1. Clone & install
 
 ```bash
-git clone <your-repo-url>
+git clone (https://github.com/sweety-mahale/-Loan-Sanction-Prediction-System)
 cd -Loan-Sanction-Prediction-System
 pip install -r requirements.txt
 pip install -e .
@@ -84,13 +84,6 @@ Open `http://localhost:5000` in your browser.
 
 ---
 
-## 📦 Deployment on Render
-
-1. Push this repo to GitHub
-2. Create a new **Web Service** on [render.com](https://render.com)
-3. Connect your repo — Render will auto-detect `render.yaml`
-4. That's it! The `buildCommand` trains models; `startCommand` launches gunicorn.
-
 ### Docker (local)
 
 ```bash
@@ -102,7 +95,7 @@ Open `http://localhost:8080`.
 
 ---
 
-## 📊 API Endpoints
+## API Endpoints
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
@@ -112,7 +105,7 @@ Open `http://localhost:8080`.
 
 ---
 
-## 📁 Key Files
+## Key Files
 
 | File | Purpose |
 |------|---------|
@@ -124,7 +117,7 @@ Open `http://localhost:8080`.
 
 ---
 
-## 🧪 Metrics (after training)
+## Metrics (after training)
 
 Check `artifacts/model_evaluation/metrics.json` for:
 - **Classifier**: accuracy, precision, recall, F1
@@ -132,7 +125,7 @@ Check `artifacts/model_evaluation/metrics.json` for:
 
 ---
 
-## 📋 Requirements
+## Requirements
 
 - Python 3.9+
 - scikit-learn, pandas, numpy, flask, gunicorn, dill, pyyaml, python-box
